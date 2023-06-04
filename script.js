@@ -13,13 +13,13 @@ const Gameboard = (() => {
 
   const render = () => {
     let boardHTML = "";
-    gameboard.forEach((square, index) => {
-      boardHTML += `<div class="square" id="square-${index}">${square}</div>`;
+    gameboard.forEach((cell, index) => {
+      boardHTML += `<div class="cell" data-id="${index}">${cell}</div>`;
     });
     document.querySelector("#gameboard").innerHTML = boardHTML;
-    const squares = document.querySelectorAll(".square");
-    squares.forEach((square) => {
-      square.addEventListener("click", Game.handleClick);
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => {
+      cell.addEventListener("click", Game.handleClick);
     });
   };
 
@@ -95,8 +95,8 @@ const Game = (() => {
   const handleClick = (event) => {
     if (gameOver) return;
 
-    let index = parseInt(event.target.id.split("-")[1]);
-
+    let index = parseInt(event.target.getAttribute("data-id"));
+  
     if (Gameboard.getGameboard()[index] !== "") return;
 
     Gameboard.update(index, players[currentPlayerIndex].mark);
