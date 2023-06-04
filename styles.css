@@ -1,3 +1,7 @@
+header {
+  text-align: center;
+}
+
 #gameboard {
   width: 100vw;
   height: 50vh;
